@@ -1,17 +1,7 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 
-import { Avatar, Button } from '@mui/material';
+
+import { Avatar,ListItemText,ListItemIcon,ListItem,Divider,Typography,List,Toolbar,AppBar,CssBaseline,Drawer,Box } from '@mui/material';
 import Darkreader from 'react-darkreader';
 
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -28,8 +18,8 @@ export default function Dashboard() {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const handleLogout=()=>{
-    navigate('/') ;
+  const handleLogout = () => {
+    navigate('/');
   }
 
   return (
@@ -52,15 +42,6 @@ export default function Dashboard() {
               style={{ margin: '0 10px' }}
               src={location.state.photoURL}
             />
-            <Button 
-            endIcon={<LogoutIcon/>}
-            variant="outlined"
-            color="inherit"
-            style={{ margin: '0 10px' }}
-            onClick={handleLogout}
-            >
-              LOG OUT
-            </Button>
             <Darkreader />
           </Box>
 
@@ -104,7 +85,20 @@ export default function Dashboard() {
             <ListItemText primary="Admin View" />
           </ListItem>
         </List>
+        
+        <List>
+          <ListItem 
+            button 
+            onClick={handleLogout}
+          >
+            <ListItemIcon>
+              <LogoutIcon />
+            </ListItemIcon>
+            <ListItemText primary="Log Out" />
+          </ListItem>
+        </List>
       </Drawer>
+
       <Box
         component="main"
         sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
