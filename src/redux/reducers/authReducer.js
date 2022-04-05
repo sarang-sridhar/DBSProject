@@ -1,8 +1,8 @@
-const initialState=false ;
+const initialState = false;
 
-const authReducer=(state=initialState,action)=>{
-    if(action.type==="ISLOGGEDIN") return !state ;
-    else return state ;
-}
+const authReducer = (state = initialState, action) => {
+  if (action.type === 'ISLOGGEDIN') return !state;
+  else return state;
+};
 
-export default authReducer ;
+export default authReducer;

@@ -1,7 +1,19 @@
 import * as React from 'react';
 
-
-import { Avatar,ListItemText,ListItemIcon,ListItem,Divider,Typography,List,Toolbar,AppBar,CssBaseline,Drawer,Box } from '@mui/material';
+import {
+  Avatar,
+  ListItemText,
+  ListItemIcon,
+  ListItem,
+  Divider,
+  Typography,
+  List,
+  Toolbar,
+  AppBar,
+  CssBaseline,
+  Drawer,
+  Box
+} from '@mui/material';
 import Darkreader from 'react-darkreader';
 
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -11,40 +23,30 @@ import SellIcon from '@mui/icons-material/Sell';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 
-
 const drawerWidth = 200;
 
 export default function Dashboard() {
-
   const location = useLocation();
   const navigate = useNavigate();
   const handleLogout = () => {
     navigate('/');
-  }
+  };
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar
         position="fixed"
-        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
-
-      >
-        <Toolbar
-          style={{ display: 'flex', justifyContent: 'space-between' }}
-        >
+        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}>
+        <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography variant="h6" noWrap component="div">
             Auction Mangement System
           </Typography>
 
           <Box style={{ display: 'flex', alignItems: 'center' }}>
-            <Avatar
-              style={{ margin: '0 10px' }}
-              src={location.state.photoURL}
-            />
+            <Avatar style={{ margin: '0 10px' }} src={location.state.photoURL} />
             <Darkreader />
           </Box>
-
         </Toolbar>
       </AppBar>
       <Drawer
@@ -53,44 +55,39 @@ export default function Dashboard() {
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
-            boxSizing: 'border-box',
-          },
+            boxSizing: 'border-box'
+          }
         }}
         variant="permanent"
-        anchor="left"
-      >
+        anchor="left">
         <Toolbar />
         <Divider />
         <List>
-          <ListItem button >
+          <ListItem button>
             <ListItemIcon>
               <StoreIcon />
             </ListItemIcon>
             <ListItemText primary="View Store" />
           </ListItem>
-          <ListItem button >
+          <ListItem button>
             <ListItemIcon>
               <SellIcon />
             </ListItemIcon>
             <ListItemText primary="Sell Something" />
           </ListItem>
-
         </List>
         <Divider />
         <List>
-          <ListItem button >
+          <ListItem button>
             <ListItemIcon>
               <AdminPanelSettingsIcon />
             </ListItemIcon>
             <ListItemText primary="Admin View" />
           </ListItem>
         </List>
-        
+
         <List>
-          <ListItem 
-            button 
-            onClick={handleLogout}
-          >
+          <ListItem button onClick={handleLogout}>
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>
@@ -99,12 +96,8 @@ export default function Dashboard() {
         </List>
       </Drawer>
 
-      <Box
-        component="main"
-        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
-      >
+      <Box component="main" sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}>
         <Toolbar />
-
       </Box>
     </Box>
   );
