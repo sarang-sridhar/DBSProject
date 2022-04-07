@@ -3,3 +3,8 @@ export const isAuth = () => {
     type: 'ISLOGGEDIN'
   };
 };
+export const isLoggedOut = () => {
+  return {
+    type: 'ISLOGGEDOUT'
+  };
+};
