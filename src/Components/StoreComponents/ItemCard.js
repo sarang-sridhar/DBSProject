@@ -21,7 +21,7 @@ const ItemCard = (props) => {
         <Button size="large" variant="outlined">
           Bid
         </Button>
-        <Button size="large" color="warning" variant="outlined">
+        <Button size="large" color="error" variant="outlined">
           Leave Bid
         </Button>
       </CardActions>

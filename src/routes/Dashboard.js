@@ -12,36 +12,35 @@ import {
   AppBar,
   CssBaseline,
   Drawer,
-  Box,
-  Backdrop,
-  CircularProgress
+  Box
 } from '@mui/material';
 import Darkreader from 'react-darkreader';
 
 import LogoutIcon from '@mui/icons-material/Logout';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import DataObjectIcon from '@mui/icons-material/DataObject';
 import StoreIcon from '@mui/icons-material/Store';
+import HistoryIcon from '@mui/icons-material/History';
 
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 // products import
 import productData from '../data/storeData';
 import ItemCard from '../Components/StoreComponents/ItemCard';
+import { isLoggedOut } from '../redux/actions';
 
 const drawerWidth = 200;
 
 export default function Dashboard() {
-  const [open, setOpen] = React.useState(null);
-
   React.useEffect(() => {
-    setOpen(true);
     console.log(productData);
-    setOpen(false);
   }, []);
 
   const location = useLocation();
   const navigate = useNavigate();
+  let dispatch = useDispatch();
   const handleLogout = () => {
+    dispatch(isLoggedOut());
     navigate('/');
   };
 
@@ -87,9 +86,18 @@ export default function Dashboard() {
         <List>
           <ListItem button>
             <ListItemIcon>
-              <AdminPanelSettingsIcon />
+              <DataObjectIcon />
             </ListItemIcon>
-            <ListItemText primary="Admin View" />
+            <ListItemText primary="Live Database" />
+          </ListItem>
+        </List>
+        <Divider />
+        <List>
+          <ListItem button>
+            <ListItemIcon>
+              <HistoryIcon />
+            </ListItemIcon>
+            <ListItemText primary="Order History" />
           </ListItem>
         </List>
 
@@ -105,10 +113,6 @@ export default function Dashboard() {
 
       <Box component="main" sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}>
         <Toolbar />
-
-        <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open}>
-          <CircularProgress color="inherit" />
-        </Backdrop>
         <div
           style={{
             width: '100%',
