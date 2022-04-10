@@ -19,4 +19,6 @@ module.exports = (sequelize,DataTypes) =>{
         defaultValue: '20000'
       },
   })
+
+  return Users
 }
