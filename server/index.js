@@ -1,21 +1,72 @@
-var bodyParser = require('body-parser')
-const express = require('express')
+const express = require("express");
+const app = express();
+const mysql = require("mysql2");
+const cors = require("cors");
 
-const app = express()
+app.use(cors());
+app.use(express.json());
 
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+const db = mysql.createConnection({
+    user:"root",
+    host:"localhost",
+    password:"yourPassword",
+    database:"auctionDb"
+})
 
-// parse application/json
-app.use(bodyParser.json())
 
-const db = require('./models')
 
-const loginRouter = require('./routes/Login')
-app.use('/login',loginRouter)
+///Login/signup API
 
-db.sequelize.sync().then(()=>{
+
+app.post('/login',(req,res)=>{
+    const name = req.body.name;
+    const uid = req.body.uid;
+    const email = req.body.email;
+    const balance = req.body.balance;
+
+    let flag=0;
+
+    db.query(
+        "SELECT * FROM users",
+        (err, result) => {
+          if (err) {
+            console.log(err);
+          } else {
+            for(let i=0;i<result.length;i++){
+                if(result[i].uid===uid){
+                    flag=1;
+                    res.send(result[i])
+                }
+            }
+            if(flag===0){
+  
+                db.query(
+                  "INSERT INTO users (name, uid, email) VALUES (?,?,?)",
+                  [name, uid, email],
+                  (err, result) => {
+                    if (err) {
+                      console.log(err);
+                    } else {
+                      var obj = new Object();
+                      obj.name=name;
+                      obj.email=email;
+                      obj.uid=uid;
+                      obj.balance=20000
+                      res.send(obj);
+                      return
+                    }
+                  }
+                );
+                  }
+          }
+        }
+      );
+
+
+      
+})
+
+
     app.listen(3001,()=>{
         console.log("server running on 3001")
     })
-})
