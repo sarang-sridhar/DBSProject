@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 const mysql = require("mysql2");
 const cors = require("cors");
+const fs = require("fs");
+
+// imports for the json data file
 
 app.use(cors());
 app.use(express.json());
@@ -9,9 +12,34 @@ app.use(express.json());
 const db = mysql.createConnection({
   user: "root",
   host: "localhost",
-  password: "password",
-  database: "auctionDb",
+  password: "superbhanu22",
+  database: "auctiondb",
 });
+
+// populating the store
+// const inventoryData = [];
+// fs.readFile("./inventory.json", "utf-8", (err, jsonString) => {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     try {
+//       const data = JSON.parse(jsonString);
+//       for (let i = 0; i < data.store.length; i++) {
+//         inventoryData.push(data.store[i]);
+//         db.query(
+//           "INSERT INTO inventory (product_id ,product_name , product_baseprice) VALUES(?,?,?)",
+//           [
+//             inventoryData[i].productId,
+//             inventoryData[i].productName,
+//             inventoryData[i].productBasePrice,
+//           ]
+//         );
+//       }
+//     } catch (err) {
+//       console.log("Error in parsing", err);
+//     }
+//   }
+// });
 
 ///Login/signup API
 
@@ -55,6 +83,14 @@ app.post("/login", (req, res) => {
     }
   });
 });
+// inserting into the inventory table
+// for (let i = 0; i < inventoryData.length; i++) {
+//   console.log(
+//     inventoryData[i].productId,
+//     inventoryData[i].productName,
+//     inventoryData[i].productBasePrice
+//   );
+// }
 
 app.listen(3001, () => {
   console.log("server running on 3001");
