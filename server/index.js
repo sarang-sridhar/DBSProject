@@ -83,14 +83,16 @@ app.post("/login", (req, res) => {
     }
   });
 });
-// inserting into the inventory table
-// for (let i = 0; i < inventoryData.length; i++) {
-//   console.log(
-//     inventoryData[i].productId,
-//     inventoryData[i].productName,
-//     inventoryData[i].productBasePrice
-//   );
-// }
+
+app.get("/get_store", (req, res) => {
+  db.query("SELECT * FROM inventory", (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
 
 app.listen(3001, () => {
   console.log("server running on 3001");

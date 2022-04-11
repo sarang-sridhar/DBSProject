@@ -8,13 +8,13 @@ const ItemCard = (props) => {
     <Card sx={{ minWidth: 300, maxWidth: 300, margin: 1 }} variant="outlined">
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          ItemName : {props.productName}
+          ItemName : {props.product_name}
         </Typography>
         <Typography gutterBottom variant="h5" component="div">
-          Id : {props.productId}
+          Id : {props.product_id}
         </Typography>
         <Typography gutterBottom variant="h5" component="div">
-          Price : {props.productPrice.toString()} ₹
+          Base price : {props.product_baseprice} ₹
         </Typography>
       </CardContent>
       <CardActions>
@@ -30,9 +30,9 @@ const ItemCard = (props) => {
 };
 
 ItemCard.propTypes = {
-  productName: PropTypes.string,
-  productId: PropTypes.string,
-  productPrice: PropTypes.number
+  product_name: PropTypes.string,
+  product_id: PropTypes.string,
+  product_baseprice: PropTypes.number
 };
 
 export default ItemCard;

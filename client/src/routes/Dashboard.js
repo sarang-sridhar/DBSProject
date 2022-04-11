@@ -23,17 +23,22 @@ import HistoryIcon from '@mui/icons-material/History';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import axios from '../axios-study';
 
 // products import
-import productData from '../data/storeData';
 import ItemCard from '../Components/StoreComponents/ItemCard';
 import { isLoggedOut } from '../redux/actions';
 
 const drawerWidth = 200;
 
 export default function Dashboard() {
+  const [productData, setProductData] = React.useState([]);
+
   React.useEffect(() => {
-    console.log(productData);
+    axios.get('/get_store').then((reponse) => {
+      setProductData(reponse.data);
+      console.log(reponse.data);
+    });
   }, []);
 
   const location = useLocation();
@@ -130,11 +135,9 @@ export default function Dashboard() {
           {productData.map((item) => (
             <>
               <ItemCard
-                productId={item.productId}
-                productName={item.productName}
-                productDescription={item.productDescription}
-                productImg={item.productImg}
-                productPrice={item.productPrice}
+                product_id={item.product_id}
+                product_name={item.product_name}
+                product_baseprice={item.product_baseprice}
               />
             </>
           ))}
