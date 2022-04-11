@@ -10,13 +10,13 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  user: "root",
-  host: "localhost",
-  password: "superbhanu22",
-  database: "auctiondb",
+  user: "unbypmeqvuu1e4pk",
+  host: "bultwttoppdkfltxkqhf-mysql.services.clever-cloud.com",
+  password: "XGDuimrzbKgDJg4vFG8S",
+  database: "bultwttoppdkfltxkqhf",
 });
 
-// populating the store
+// // populating the store
 // const inventoryData = [];
 // fs.readFile("./inventory.json", "utf-8", (err, jsonString) => {
 //   if (err) {
@@ -44,6 +44,7 @@ const db = mysql.createConnection({
 ///Login/signup API
 
 app.post("/login", (req, res) => {
+  console.log("Request called");
   const name = req.body.name;
   const uid = req.body.uid;
   const email = req.body.email;
