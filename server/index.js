@@ -84,6 +84,34 @@ app.post("/login", (req, res) => {
   });
 });
 
+app.post("/update_store", (req, res) => {
+  const item_id = req.body.item_id;
+  const item_name = req.body.item_name;
+  const current_highest_buyer = req.body.current_highest_buyer;
+  const current_price = req.body.current_price;
+  const base_price = req.body.base_price;
+
+  db.query(
+    "INSERT INTO users (item_id , item_name , current_highest_buyer , current_price , base_price) VALUES (? , ? , ? , ? , ?)"[
+      ([item_id, item_name, current_highest_buyer, current_price, base_price],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          let obj = new Object();
+          obj.item_id = item_id;
+          obj.item_name = item_name;
+          obj.current_highest_buyer = current_highest_buyer;
+          obj.current_price = current_price;
+          obj.base_price = base_price;
+          res.send(obj);
+          return;
+        }
+      })
+    ]
+  );
+});
+
 app.get("/get_store", (req, res) => {
   db.query("SELECT * FROM inventory", (err, result) => {
     if (err) {
