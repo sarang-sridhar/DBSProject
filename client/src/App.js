@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import ProtectedRoute from './ProtectedRoute';
 import { useSelector } from 'react-redux';
+import BidProducts from './routes/BidProducts';
 
 function App() {
   const auth = useSelector((state) => state.authReducer);
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route element={<ProtectedRoute authState={auth} />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/products/:product_id" element={<BidProducts />} />
         </Route>
         <Route path="*" element={<ErrorPage />} />
       </Routes>

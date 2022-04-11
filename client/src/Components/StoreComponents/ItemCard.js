@@ -1,9 +1,12 @@
 import React from 'react';
 
 import { Card, CardContent, CardActions, Button, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const ItemCard = (props) => {
+  const navigate = useNavigate();
+
   return (
     <Card sx={{ minWidth: 300, maxWidth: 300, margin: 1 }} variant="outlined">
       <CardContent>
@@ -18,11 +21,20 @@ const ItemCard = (props) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="large" variant="outlined">
+        <Button
+          size="large"
+          variant="outlined"
+          fullWidth
+          onClick={() => {
+            navigate('/products/:' + props.product_id, {
+              state: {
+                id: props.product_id,
+                itemName: props.product_name,
+                basePrice: props.product_baseprice
+              }
+            });
+          }}>
           Bid
-        </Button>
-        <Button size="large" color="error" variant="outlined">
-          Leave Bid
         </Button>
       </CardActions>
     </Card>

@@ -44,7 +44,6 @@ const db = mysql.createConnection({
 ///Login/signup API
 
 app.post("/login", (req, res) => {
-  console.log("Request called");
   const name = req.body.name;
   const uid = req.body.uid;
   const email = req.body.email;
