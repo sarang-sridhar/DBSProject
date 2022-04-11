@@ -7,19 +7,36 @@ import GoogleButton from 'react-google-button';
 import { useDispatch } from 'react-redux';
 import { isAuth } from '../redux/actions/index.js';
 
+import axios from '../axios-study.js';
+
 function Login() {
   let dispatch = useDispatch();
   let navigate = useNavigate();
   const authHandle = () => {
     signInWithGoogle()
       .then((result) => {
+        var data = {
+          name: result.user.displayName,
+          uid: result.user.uid,
+          email: result.user.email
+        };
+        axios
+          .post('/login', data)
+          .then((response) => {
+            console.log(response);
+            navigate('/dashboard', {
+              state: {
+                name: response.data.name,
+                email: response.data.email,
+                uid: response.data.uid,
+                balance: response.data.balance,
+                photoURL: result.user.photoURL
+              }
+            });
+          })
+          .catch((error) => console.log(error));
+        console.log(result);
         dispatch(isAuth());
-        navigate('/dashboard', {
-          state: {
-            name: result.user.displayName,
-            photoURL: result.user.photoURL
-          }
-        });
       })
       .catch((err) => console.log(err));
   };

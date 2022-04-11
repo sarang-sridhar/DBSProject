@@ -55,7 +55,10 @@ export default function Dashboard() {
             Auction Mangement System
           </Typography>
 
+          <Typography>Welcome {location.state.name}</Typography>
+
           <Box style={{ display: 'flex', alignItems: 'center' }}>
+            <Typography>Balance : {location.state.balance}</Typography>
             <Avatar style={{ margin: '0 10px' }} src={location.state.photoURL} />
             <Darkreader />
           </Box>
