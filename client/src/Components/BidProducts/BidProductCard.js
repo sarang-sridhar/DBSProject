@@ -26,6 +26,7 @@ const BidProductCard = (props) => {
 
   const handleBid = () => {
     if (currentVal > currentPrice) {
+      setCurrentPrice(currentVal);
       let data = {
         item_id: props.itemId,
         item_name: props.itemName,
@@ -33,10 +34,13 @@ const BidProductCard = (props) => {
         current_price: currentVal,
         base_price: props.basePrice
       };
-      axios.post('/update_store', data).then((response) => {
-        console.log(response);
-      });
-      setCurrentPrice(currentVal);
+      axios
+        .post('/update_store', data)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => console.log(error));
+
       setSucessOpen(true);
     } else {
       setOpen(true);
