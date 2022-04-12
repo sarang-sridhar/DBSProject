@@ -14,12 +14,11 @@ import {
   Drawer,
   Box
 } from '@mui/material';
-import Darkreader from 'react-darkreader';
 
 import LogoutIcon from '@mui/icons-material/Logout';
-import DataObjectIcon from '@mui/icons-material/DataObject';
 import StoreIcon from '@mui/icons-material/Store';
 import HistoryIcon from '@mui/icons-material/History';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -69,7 +68,6 @@ export default function Dashboard() {
               Balance : {location.state.balance}
             </Typography>
             <Avatar style={{ margin: '0 10px' }} src={location.state.photoURL} />
-            <Darkreader />
           </Box>
         </Toolbar>
       </AppBar>
@@ -96,11 +94,11 @@ export default function Dashboard() {
         </List>
         <Divider />
         <List>
-          <ListItem button>
+          <ListItem button onClick={() => navigate('/admin')}>
             <ListItemIcon>
-              <DataObjectIcon />
+              <AdminPanelSettingsIcon />
             </ListItemIcon>
-            <ListItemText primary="Live Database" />
+            <ListItemText primary="Admin" />
           </ListItem>
         </List>
         <Divider />

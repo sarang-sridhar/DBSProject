@@ -9,6 +9,7 @@ import {
   Snackbar
 } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
+import Countdown from 'react-countdown';
 
 import PropTypes from 'prop-types';
 
@@ -151,6 +152,9 @@ const BidProductCard = (props) => {
             {date.getTime() - date2.getTime() < 0
               ? getDate(props.time.slice(0, 10)) + ' ' + tConvert(props.time.slice(11, 16))
               : 'Bid Over'}
+          </Typography>
+          <Typography gutterBottom variant="h5" component="div">
+            Time Left : {<Countdown date={Date.now() + 8.64e8} />}
           </Typography>
         </CardContent>
         <CardActions>
