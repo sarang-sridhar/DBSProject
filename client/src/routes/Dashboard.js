@@ -16,7 +16,6 @@ import {
 } from '@mui/material';
 
 import LogoutIcon from '@mui/icons-material/Logout';
-import DataObjectIcon from '@mui/icons-material/DataObject';
 import StoreIcon from '@mui/icons-material/Store';
 import HistoryIcon from '@mui/icons-material/History';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
@@ -91,15 +90,6 @@ export default function Dashboard() {
               <StoreIcon />
             </ListItemIcon>
             <ListItemText primary="Store" />
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem button>
-            <ListItemIcon>
-              <DataObjectIcon />
-            </ListItemIcon>
-            <ListItemText primary="Live Database" />
           </ListItem>
         </List>
         <Divider />
