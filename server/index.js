@@ -130,18 +130,15 @@ app.post("/update_store", (req, res) => {
   const base_price = req.body.base_price;
 
   db.query(
-    "INSERT INTO bidding_table (item_id , current_highest_buyer , current_price , base_price) VALUES (? , ? , ? , ? , ?)",
-    [item_id, current_highest_buyer, current_price, base_price],
+    "UPDATE bidding_table set current_highest_buyer=(?),current_price=(?) where item_id=(?)",
+    [current_highest_buyer, current_price, item_id],
     (err, result) => {
       if (err) {
         console.log(err);
       } else {
-        let obj = new Object();
-        obj.item_id = item_id;
-        obj.item_name = item_name;
-        obj.current_highest_buyer = current_highest_buyer;
-        obj.current_price = current_price;
-        obj.base_price = base_price;
+        console.log(result);
+        var obj = {};
+        obj.status = 1;
         res.send(obj);
         return;
       }

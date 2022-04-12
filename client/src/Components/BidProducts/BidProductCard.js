@@ -38,6 +38,9 @@ const BidProductCard = (props) => {
         .post('/update_store', data)
         .then((response) => {
           console.log(response);
+          if (response.data.status == 1) {
+            props.setCount(props.count + 1);
+          }
         })
         .catch((error) => console.log(error));
 
@@ -121,7 +124,9 @@ BidProductCard.propTypes = {
   basePrice: PropTypes.number,
   currentPrice: PropTypes.number,
   highestBidder: PropTypes.string,
-  time: PropTypes.string
+  time: PropTypes.string,
+  count: PropTypes.number,
+  setCount: PropTypes.func
 };
 
 export default BidProductCard;
