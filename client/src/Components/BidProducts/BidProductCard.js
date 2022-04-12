@@ -18,6 +18,68 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
+// function timeToMins(time) {
+//   var b = time.split(':');
+//   return b[0] * 60 + +b[1];
+// }
+
+// Convert minutes to a time in format hh:mm
+// Returned value is in range 00  to 24 hrs
+// function timeFromMins(mins) {
+//   function z(n) {
+//     return (n < 10 ? '0' : '') + n;
+//   }
+//   var h = ((mins / 60) | 0) % 24;
+//   var m = mins % 60;
+//   return z(h) + ':' + z(m);
+// }
+
+// Add two times in hh:mm format
+// function addTimes(t0, t1) {
+//   return timeFromMins(timeToMins(t0) + timeToMins(t1));
+// }
+
+function tConvert(time) {
+  // Check correct time format and split into components
+  time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+  if (time.length > 1) {
+    // If time format correct
+    time = time.slice(1); // Remove full string match value
+    time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+    time[0] = +time[0] % 12 || 12; // Adjust hours
+  }
+  return time.join(''); // return adjusted time or original string
+}
+
+function getDate(date) {
+  var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ];
+  var now = new Date(date);
+  return (
+    days[now.getDay()] +
+    ' ' +
+    months[now.getMonth()] +
+    ' ' +
+    now.getDate() +
+    ' ' +
+    now.getFullYear()
+  );
+}
+
 const BidProductCard = (props) => {
   const [currentVal, setCurrentVal] = React.useState(props.basePrice);
   const [currentPrice, setCurrentPrice] = React.useState(props.basePrice);
@@ -58,6 +120,10 @@ const BidProductCard = (props) => {
     setSucessOpen(false);
   };
 
+  var date = new Date();
+  var date2 = new Date(props.time);
+  console.log(date.getTime() - date2.getTime());
+
   return (
     <>
       <Card
@@ -81,7 +147,10 @@ const BidProductCard = (props) => {
             Current Highest Bidder : {props.highestBidder}
           </Typography>
           <Typography gutterBottom variant="h5" component="div">
-            Time : {props.time}
+            End Time :{' '}
+            {date.getTime() - date2.getTime() < 0
+              ? getDate(props.time.slice(0, 10)) + ' ' + tConvert(props.time.slice(11, 16))
+              : 'Bid Over'}
           </Typography>
         </CardContent>
         <CardActions>
@@ -97,7 +166,13 @@ const BidProductCard = (props) => {
             />
           </div>
           <div>
-            <Button size="large" variant="contained" color="warning" fullWidth onClick={handleBid}>
+            <Button
+              size="large"
+              variant="contained"
+              color="warning"
+              fullWidth
+              onClick={handleBid}
+              disabled={date.getTime() > date2.getTime() ? true : false}>
               Bid
             </Button>
           </div>

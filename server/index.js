@@ -98,20 +98,37 @@ app.post("/get_details", (req, res) => {
         if (result.length) {
           res.send(result[0]);
         } else {
+          var date = new Date();
+          date.setHours(date.getHours() + 4);
           db.query(
-            "INSERT INTO bidding_table (item_id , base_price) VALUES (? , ? )",
-            [item_id, base_price],
+            "INSERT INTO bidding_table (item_id , base_price,time) VALUES (? , ? ,? )",
+            [item_id, base_price, date],
             (err, result) => {
               if (err) {
                 console.log(err);
               } else {
-                let obj = new Object();
-                obj.item_id = item_id;
-                obj.current_highest_buyer = "null";
-                obj.current_price = "null";
-                obj.base_price = base_price;
-                obj.time = "test_time";
-                res.send(obj);
+                // let obj = new Object();
+                // obj.item_id = item_id;
+                // obj.current_highest_buyer = "null";
+                // obj.current_price = "null";
+                // obj.base_price = base_price;
+
+                // obj.time = date;
+                // res.send(obj);
+                db.query(
+                  "SELECT * from bidding_table where item_id=(?)",
+                  [item_id],
+                  (err, result) => {
+                    if (err) {
+                      console.log(err);
+                    } else {
+                      // console.log(result.length);
+                      if (result.length) {
+                        res.send(result[0]);
+                      }
+                    }
+                  }
+                );
                 return;
               }
             }
