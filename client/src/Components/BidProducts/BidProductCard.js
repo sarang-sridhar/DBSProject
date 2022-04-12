@@ -72,10 +72,13 @@ const BidProductCard = (props) => {
             Base price : {props.basePrice} ₹
           </Typography>
           <Typography gutterBottom variant="h5" component="div">
-            Current price : {currentPrice} ₹
+            Current price : {props.currentPrice} ₹
           </Typography>
           <Typography gutterBottom variant="h5" component="div">
-            Current Highest Bidder : {props.currentHighestBidder}
+            Current Highest Bidder : {props.highestBidder}
+          </Typography>
+          <Typography gutterBottom variant="h5" component="div">
+            Time : {props.time}
           </Typography>
         </CardContent>
         <CardActions>
@@ -117,7 +120,8 @@ BidProductCard.propTypes = {
   itemId: PropTypes.string,
   basePrice: PropTypes.number,
   currentPrice: PropTypes.number,
-  currentHighestBidder: PropTypes.string
+  highestBidder: PropTypes.string,
+  time: PropTypes.string
 };
 
 export default BidProductCard;
