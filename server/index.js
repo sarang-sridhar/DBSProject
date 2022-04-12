@@ -136,7 +136,7 @@ app.post("/update_store", (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        console.log(result);
+        // console.log(result);
         var obj = {};
         obj.status = 1;
         res.send(obj);

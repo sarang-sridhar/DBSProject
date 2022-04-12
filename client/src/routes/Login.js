@@ -23,6 +23,7 @@ function Login() {
         axios
           .post('/login', data)
           .then((response) => {
+            sessionStorage.setItem('user', response.data.name);
             console.log(response);
             navigate('/dashboard', {
               state: {

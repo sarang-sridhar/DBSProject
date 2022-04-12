@@ -30,7 +30,7 @@ const BidProductCard = (props) => {
       let data = {
         item_id: props.itemId,
         item_name: props.itemName,
-        current_highest_buyer: 'bhanu',
+        current_highest_buyer: sessionStorage.getItem('user'),
         current_price: currentVal,
         base_price: props.basePrice
       };
