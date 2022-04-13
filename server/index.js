@@ -113,7 +113,7 @@ app.post("/get_details", (req, res) => {
           } else res.send(result[0]);
         } else {
           var date = new Date();
-          date.setHours(date.getHours() + 4);
+          date.setMinutes(date.getMinutes() + 10);
           db.query(
             "INSERT INTO bidding_table (item_id , base_price,time) VALUES (? , ? ,? )",
             [item_id, base_price, date],
