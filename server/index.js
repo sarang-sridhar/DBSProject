@@ -95,7 +95,21 @@ app.post("/get_details", (req, res) => {
         console.log(err);
       } else {
         if (result.length) {
-          res.send(result[0]);
+          // console.log(result[0].current_highest_buyer)
+          db.query(
+            "SELECT name FROM users WHERE uid=(?) ",
+            [result[0].current_highest_buyer],
+            (err, result2) => {
+              if (err) {
+                console.log(err);
+              } else {
+                // console.log(result2[0].name);
+                result[0].current_highest_buyer = result2[0].name;
+                // console.log(result[0]);
+                res.send(result[0]);
+              }
+            }
+          );
         } else {
           var date = new Date();
           date.setHours(date.getHours() + 4);
@@ -146,6 +160,31 @@ app.post("/update_store", (req, res) => {
   const base_price = req.body.base_price;
 
   db.query(
+    "SELECT current_highest_buyer,current_price from bidding_table where item_id=(?)",
+    [item_id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        if (result[0].current_highest_buyer != "null") {
+          // console.log(result[0]);
+          db.query(
+            "UPDATE users set balance=balance+(?) where uid=(?)",
+            [result[0].current_price, result[0].current_highest_buyer],
+            (err, result) => {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log("Older bidders money given back");
+              }
+            }
+          );
+        } else console.log("bleh bleh");
+      }
+    }
+  );
+
+  db.query(
     "UPDATE bidding_table set current_highest_buyer=(?),current_price=(?) where item_id=(?)",
     [current_highest_buyer, current_price, item_id],
     (err, result) => {
@@ -153,6 +192,17 @@ app.post("/update_store", (req, res) => {
         console.log(err);
       } else {
         // console.log(result);
+        db.query(
+          "UPDATE users set balance=balance-(?) where uid=(?)",
+          [current_price, current_highest_buyer],
+          (err, result) => {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log("Newer bidders money subtracted");
+            }
+          }
+        );
         var obj = {};
         obj.status = 1;
         res.send(obj);
@@ -171,22 +221,36 @@ app.get("/get_store", (req, res) => {
     }
   });
 });
-
-app.put("/update_balance", (req, res) => {
-  const id = req.body.id;
-  const balance = req.body.balance;
+app.get("/get_balance", (req, res) => {
+  // console.log(req.query.uid);
   db.query(
-    "UPDATE users SET balance = ? WHERE uid = ?",
-    [balance, id],
+    "SELECT balance FROM users WHERE uid=(?)",
+    [req.query.uid],
     (err, result) => {
       if (err) {
         console.log(err);
       } else {
-        res.send(result);
+        res.send(result[0]);
       }
     }
   );
 });
+
+// app.put("/update_balance", (req, res) => {
+//   const id = req.body.id;
+//   const balance = req.body.balance;
+//   db.query(
+//     "UPDATE users SET balance = ? WHERE uid = ?",
+//     [balance, id],
+//     (err, result) => {
+//       if (err) {
+//         console.log(err);
+//       } else {
+//         res.send(result);
+//       }
+//     }
+//   );
+// });
 
 app.listen(3001, () => {
   console.log("server running on 3001");

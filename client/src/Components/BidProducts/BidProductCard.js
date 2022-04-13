@@ -92,15 +92,15 @@ const BidProductCard = (props) => {
       let data = {
         item_id: props.itemId,
         item_name: props.itemName,
-        current_highest_buyer: sessionStorage.getItem('user'),
+        current_highest_buyer: sessionStorage.getItem('uid'),
         current_price: currentVal,
         base_price: props.basePrice
       };
 
-      let updateBalanceData = {
-        id: sessionStorage.getItem('uid'),
-        balance: 69420
-      };
+      // let updateBalanceData = {
+      //   id: sessionStorage.getItem('uid'),
+      //   balance: 69420
+      // };
 
       axios
         .post('/update_store', data)
@@ -112,12 +112,12 @@ const BidProductCard = (props) => {
         })
         .catch((error) => console.log(error));
 
-      axios
-        .put('/update_balance', updateBalanceData)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => console.log(error));
+      // axios
+      //   .put('/update_balance', updateBalanceData)
+      //   .then((response) => {
+      //     console.log(response);
+      //   })
+      //   .catch((error) => console.log(error));
 
       setSucessOpen(true);
     } else {

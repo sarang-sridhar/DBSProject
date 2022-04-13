@@ -32,15 +32,23 @@ const drawerWidth = 200;
 
 export default function Dashboard() {
   const [productData, setProductData] = React.useState([]);
+  const location = useLocation();
+  const [balance, setBalance] = React.useState();
 
   React.useEffect(() => {
     axios.get('/get_store').then((reponse) => {
       setProductData(reponse.data);
       console.log(reponse.data);
     });
+
+    axios
+      .get('/get_balance', { params: { uid: sessionStorage.getItem('uid') } })
+      .then((response) => {
+        setBalance(response.data.balance);
+      })
+      .catch((error) => console.log(error));
   }, []);
 
-  const location = useLocation();
   const navigate = useNavigate();
   let dispatch = useDispatch();
   const handleLogout = () => {
@@ -65,7 +73,7 @@ export default function Dashboard() {
 
           <Box style={{ display: 'flex', alignItems: 'center' }}>
             <Typography variant="h6" noWrap component="div">
-              Balance : {location.state.balance}
+              Balance : {balance}
             </Typography>
             <Avatar style={{ margin: '0 10px' }} src={location.state.photoURL} />
           </Box>

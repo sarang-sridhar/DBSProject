@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Navigate, Outlet } from 'react-router-dom';
 
-function ProtectedRoute({ authState }) {
-  return authState ? <Outlet /> : <Navigate to="/" />;
+function ProtectedRoute() {
+  return sessionStorage.getItem('uid') ? <Outlet /> : <Navigate to="/" />;
 }
 
 ProtectedRoute.propTypes = {
