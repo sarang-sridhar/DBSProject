@@ -17,8 +17,7 @@ function Login() {
       .then((result) => {
         var data = {
           name: result.user.displayName,
-          uid: result.user.uid,
-          email: result.user.email
+          uid: result.user.uid
         };
         axios
           .post('/login', data)
@@ -29,7 +28,6 @@ function Login() {
             navigate('/dashboard', {
               state: {
                 name: response.data.name,
-                email: response.data.email,
                 uid: response.data.uid,
                 balance: response.data.balance,
                 photoURL: result.user.photoURL

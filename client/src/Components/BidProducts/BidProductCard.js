@@ -160,6 +160,9 @@ const BidProductCard = (props) => {
             Current Highest Bidder : {props.highestBidder}
           </Typography>
           <Typography gutterBottom variant="h5" component="div">
+            Current Highest ID : {props.highestBidder}
+          </Typography>
+          <Typography gutterBottom variant="h5" component="div">
             End Time :{' '}
             {date.getTime() - date2.getTime() < 0
               ? getDate(props.time.slice(0, 10)) + ' ' + tConvert(props.time.slice(11, 16))

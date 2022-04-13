@@ -61,16 +61,19 @@ export default function Dashboard() {
       <CssBaseline />
       <AppBar
         position="fixed"
-        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}>
+        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`, p: 0.1 }}>
         <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography variant="h6" noWrap component="div">
             Auction Mangement System
           </Typography>
-
-          <Typography variant="h6" noWrap component="div">
-            Welcome : {location.state.name}
+          <Typography>
+            <Typography variant="h6" noWrap component="div">
+              Welcome : {location.state.name}
+            </Typography>
+            <Typography variant="h6" noWrap component="div">
+              User Id : {location.state.uid}
+            </Typography>
           </Typography>
-
           <Box style={{ display: 'flex', alignItems: 'center' }}>
             <Typography variant="h6" noWrap component="div">
               Balance : {balance}

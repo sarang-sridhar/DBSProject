@@ -46,7 +46,6 @@ const db = mysql.createConnection({
 app.post("/login", (req, res) => {
   const name = req.body.name;
   const uid = req.body.uid;
-  const email = req.body.email;
   const balance = req.body.balance;
 
   let flag = 0;
@@ -63,15 +62,14 @@ app.post("/login", (req, res) => {
       }
       if (flag === 0) {
         db.query(
-          "INSERT INTO users (name, uid, email) VALUES (?,?,?)",
-          [name, uid, email],
+          "INSERT INTO users (name, uid) VALUES (?,?,?)",
+          [name, uid],
           (err, result) => {
             if (err) {
               console.log(err);
             } else {
               var obj = new Object();
               obj.name = name;
-              obj.email = email;
               obj.uid = uid;
               obj.balance = 20000;
               res.send(obj);

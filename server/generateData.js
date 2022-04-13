@@ -4,7 +4,7 @@ const fs = require("fs");
 let inventory = {};
 inventory.store = [];
 
-for (let i = 1; i <= 500; i++) {
+for (let i = 1; i <= 30; i++) {
   inventory.store.push({
     productId: "bs_auction_" + i,
     productName: faker.commerce.product(),
