@@ -1,7 +1,7 @@
 import { signInWithGoogle } from '../auth/Firebase.js';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import GoogleButton from 'react-google-button';
 import FadeLoader from 'react-spinners/FadeLoader';
 import { useDispatch } from 'react-redux';
@@ -51,11 +51,40 @@ function Login() {
         width: '100%',
         height: '100vh',
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
+        flexDirection: 'column',
         alignItems: 'center',
-        opacity: loading ? '0.5' : '1'
+        opacity: loading ? '0.5' : '1',
+        overflowY: 'hidden'
       }}>
+      <Typography align="center" variant="h3">
+        Auction Management System
+      </Typography>
+      <Typography align="center" variant="h5">
+        Project Number 4
+      </Typography>
       <GoogleButton onClick={authHandle} />
+      <Typography align="center" variant="h5">
+        <Typography
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: '60vw'
+          }}>
+          <Typography>
+            <Typography align="center" variant="h6">
+              Sarang Sridhar
+            </Typography>
+            <Typography align="center">2020A7PS0297P</Typography>
+          </Typography>
+          <Typography>
+            <Typography align="center" variant="h6">
+              Bhanupratap Rathore
+            </Typography>
+            <Typography align="center">2020A7PS1675P</Typography>
+          </Typography>
+        </Typography>
+      </Typography>
       <FadeLoader
         color={'blue'}
         loading={loading}
