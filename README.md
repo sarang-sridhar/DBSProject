@@ -12,8 +12,6 @@ The project structure is divided into two parts -
 
 To start the project you need to have node (latest stable release) installed in your system .
 
-To run the project git clone the repository then change to the directory Auction-Management-System
-
 To run the frontend run the command
 cd client
 npm i
@@ -30,3 +28,5 @@ npm i
 npm start
 
 This will start the backend server on localhost:3001
+
+Note : The timer is set to 5 minutes and for demonstration purposes it was set to 1 mins the bid will automatically close after 5 minutes of opening for the first time if no one bids on the product it would go unsold.
