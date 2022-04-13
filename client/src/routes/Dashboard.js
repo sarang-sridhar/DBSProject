@@ -147,6 +147,7 @@ export default function Dashboard() {
                 product_id={item.product_id}
                 product_name={item.product_name}
                 product_baseprice={item.product_baseprice}
+                balance={balance}
               />
             </>
           ))}

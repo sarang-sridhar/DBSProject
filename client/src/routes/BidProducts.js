@@ -33,6 +33,7 @@ const BidProducts = () => {
         currentPrice={details.current_price}
         highestBidder={details.current_highest_buyer}
         time={details.time}
+        balance={location.state.balance}
       />
     </>
   );
