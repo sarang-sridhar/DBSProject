@@ -82,7 +82,7 @@ export default function Dashboard() {
           </Typography>
           <Box style={{ display: 'flex', alignItems: 'center' }}>
             <Typography variant="h6" noWrap component="div">
-              Balance : {balance}
+              Current Balance : {balance} ₹
             </Typography>
             <Avatar style={{ margin: '0 10px' }} src={location.state.photoURL} />
           </Box>

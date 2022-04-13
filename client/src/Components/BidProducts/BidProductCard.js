@@ -3,12 +3,16 @@ import {
   Card,
   CardActions,
   CardContent,
+  CardMedia,
   Typography,
   Button,
   TextField,
   Snackbar
 } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
+
+import sold from '../../assets/SoldOut/sold.png';
+import unsold from '../../assets/SoldOut/unsold.png';
 
 import PropTypes from 'prop-types';
 
@@ -17,27 +21,6 @@ import axios from '../../axios-study';
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
-
-// function timeToMins(time) {
-//   var b = time.split(':');
-//   return b[0] * 60 + +b[1];
-// }
-
-// Convert minutes to a time in format hh:mm
-// Returned value is in range 00  to 24 hrs
-// function timeFromMins(mins) {
-//   function z(n) {
-//     return (n < 10 ? '0' : '') + n;
-//   }
-//   var h = ((mins / 60) | 0) % 24;
-//   var m = mins % 60;
-//   return z(h) + ':' + z(m);
-// }
-
-// Add two times in hh:mm format
-// function addTimes(t0, t1) {
-//   return timeFromMins(timeToMins(t0) + timeToMins(t1));
-// }
 
 function tConvert(time) {
   // Check correct time format and split into components
@@ -86,6 +69,8 @@ const BidProductCard = (props) => {
   const [open, setOpen] = React.useState(false);
   const [successOpen, setSucessOpen] = React.useState(false);
 
+  console.log(props.highestBidder);
+
   const handleBid = () => {
     if (currentVal > currentPrice && props.balance > currentVal) {
       setCurrentPrice(currentVal);
@@ -97,11 +82,7 @@ const BidProductCard = (props) => {
         base_price: props.basePrice
       };
 
-      // let updateBalanceData = {
-      //   id: sessionStorage.getItem('uid'),
-      //   balance: 69420
-      // };
-
+      console.log(props.highestBidder);
       axios
         .post('/update_store', data)
         .then((response) => {
@@ -113,18 +94,13 @@ const BidProductCard = (props) => {
         })
         .catch((error) => console.log(error));
 
-      // axios
-      //   .put('/update_balance', updateBalanceData)
-      //   .then((response) => {
-      //     console.log(response);
-      //   })
-      //   .catch((error) => console.log(error));
-
       setSucessOpen(true);
     } else {
       setOpen(true);
     }
   };
+
+  console.log(props.highestBidder);
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -136,8 +112,8 @@ const BidProductCard = (props) => {
 
   var date = new Date();
   var date2 = new Date(props.time);
-  console.log(date.getTime() - date2.getTime());
 
+  console.log(props.highestBidder);
   return (
     <>
       <Card
@@ -148,6 +124,16 @@ const BidProductCard = (props) => {
         elevation={3}
         variant="elevation">
         <CardContent>
+          {date.getTime() - date2.getTime() < 0 ? (
+            <></>
+          ) : (
+            <CardMedia
+              component="img"
+              height="200"
+              image={props.highestBidder === null ? sold : unsold}
+              alt=""
+            />
+          )}
           <Typography gutterBottom variant="h5" component="div">
             ItemName : {props.itemName}
           </Typography>
@@ -170,7 +156,7 @@ const BidProductCard = (props) => {
             End Time :{' '}
             {date.getTime() - date2.getTime() < 0
               ? getDate(props.time.slice(0, 10)) + ' ' + tConvert(props.time.slice(11, 16))
-              : 'Bid Over'}
+              : 'Bidding time is over !!'}
           </Typography>
           {/* <Typography gutterBottom variant="h5" component="div">
             Time Left : {<Countdown date={Date.now() + 8.64e8} />}
@@ -186,6 +172,7 @@ const BidProductCard = (props) => {
               type="number"
               fullWidth
               onChange={(e) => setCurrentVal(e.target.value)}
+              disabled={date.getTime() > date2.getTime() ? true : false}
             />
           </div>
           <div>
