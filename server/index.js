@@ -62,7 +62,7 @@ app.post("/login", (req, res) => {
       }
       if (flag === 0) {
         db.query(
-          "INSERT INTO users (name, uid) VALUES (?,?,?)",
+          "INSERT INTO users (name, uid) VALUES (?,?)",
           [name, uid],
           (err, result) => {
             if (err) {
@@ -94,20 +94,23 @@ app.post("/get_details", (req, res) => {
       } else {
         if (result.length) {
           // console.log(result[0].current_highest_buyer)
-          db.query(
-            "SELECT name FROM users WHERE uid=(?) ",
-            [result[0].current_highest_buyer],
-            (err, result2) => {
-              if (err) {
-                console.log(err);
-              } else {
-                // console.log(result2[0].name);
-                result[0].current_highest_buyer = result2[0].name;
-                // console.log(result[0]);
-                res.send(result[0]);
+          if (result[0].current_highest_buyer != "null") {
+            db.query(
+              "SELECT name FROM users WHERE uid=(?) ",
+              [result[0].current_highest_buyer],
+              (err, result2) => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  // console.log(result2[0].name);
+                  result[0].current_highest_buyer =
+                    result2[0].name + "-" + result[0].current_highest_buyer;
+                  // console.log(result[0]);
+                  res.send(result[0]);
+                }
               }
-            }
-          );
+            );
+          } else res.send(result[0]);
         } else {
           var date = new Date();
           date.setHours(date.getHours() + 4);
@@ -126,6 +129,7 @@ app.post("/get_details", (req, res) => {
 
                 // obj.time = date;
                 // res.send(obj);
+
                 db.query(
                   "SELECT * from bidding_table where item_id=(?)",
                   [item_id],

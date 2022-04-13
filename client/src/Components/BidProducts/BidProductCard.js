@@ -157,10 +157,10 @@ const BidProductCard = (props) => {
             Current price : {props.currentPrice} ₹
           </Typography>
           <Typography gutterBottom variant="h5" component="div">
-            Current Highest Bidder : {props.highestBidder}
+            Current Highest Bidder : {props.highestBidder ? props.highestBidder.split('-')[0] : ''}
           </Typography>
           <Typography gutterBottom variant="h5" component="div">
-            Current Highest ID : {props.highestBidder}
+            Current Highest ID : {props.highestBidder ? props.highestBidder.split('-')[1] : 'null'}
           </Typography>
           <Typography gutterBottom variant="h5" component="div">
             End Time :{' '}
