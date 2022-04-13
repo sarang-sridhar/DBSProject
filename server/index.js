@@ -249,6 +249,7 @@ app.get("/my_products", (req, res) => {
         // console.log(result);
         var date = new Date();
         let arr = [];
+        let arr2 = [];
         result.map((item) => {
           var obj = {};
           var date2 = new Date(item.time);
@@ -257,23 +258,49 @@ app.get("/my_products", (req, res) => {
             obj.item_id = item.item_id;
             obj.current_price = item.current_price;
             obj.time = item.time;
-            db.query(
-              "SELECT product_name FROM inventory where product_id=(?)",
-              [item.item_id],
-              (err, result2) => {
-                if (err) {
-                  console.log(err);
-                } else {
-                  // console.log(result[0].product_name);
-                  obj.product_name = result2[0].product_name;
-                }
-              }
-            );
+            // db.query(
+            //   "SELECT product_name FROM inventory where product_id=(?)",
+            //   [item.item_id],
+            //   (err, result) => {
+            //     if (err) {
+            //       console.log(err);
+            //     } else {
+            //       // console.log(result[0].product_name);
+            //       obj.product_name = result[0].product_name;
+            //       console.log(obj);
+            //     }
+            //   }
+            // );
+            arr2.push(obj.item_id);
             arr.push(obj);
           }
         });
-        console.log(arr);
-        res.send(arr);
+        // console.log(arr2);
+        if (arr2.length) {
+          db.query(
+            "SELECT product_name FROM inventory where product_id IN (?)",
+            [arr2],
+            (err, result) => {
+              if (err) {
+                console.log(err);
+              } else {
+                // console.log(result);
+                let arr3 = [];
+                for (let i = 0; i < arr.length; i++) {
+                  let obj = {};
+                  obj.item_id = arr[i].item_id;
+                  obj.current_price = arr[i].current_price;
+                  obj.time = arr[i].time;
+                  obj.product_name = result[i].product_name;
+                  arr3.push(obj);
+                }
+                console.log(arr3);
+                res.send(arr3);
+              }
+            }
+          );
+        } else res.send(arr);
+        // console.log(arr);
       }
     }
   );
