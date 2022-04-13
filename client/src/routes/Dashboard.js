@@ -127,7 +127,7 @@ export default function Dashboard() {
             <ListItemText primary="Order History" />
           </ListItem>
         </List>
-
+        <Divider />
         <List>
           <ListItem button onClick={handleLogout}>
             <ListItemIcon>

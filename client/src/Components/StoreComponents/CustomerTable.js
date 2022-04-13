@@ -7,7 +7,8 @@ import {
   TableContainer,
   TableCell,
   TableBody,
-  Table
+  Table,
+  Typography
 } from '@mui/material';
 import axios from '../../axios-study';
 import FadeLoader from 'react-spinners/FadeLoader';
@@ -114,7 +115,9 @@ export default function CustomerTable() {
                   </TableRow>
                 ))
               ) : (
-                <>No items Bought Yet</>
+                <Typography variant="h4" align="center">
+                  No items Bought Yet
+                </Typography>
               )
             ) : (
               <></>
