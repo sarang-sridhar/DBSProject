@@ -238,6 +238,47 @@ app.get("/get_balance", (req, res) => {
   );
 });
 
+app.get("/my_products", (req, res) => {
+  db.query(
+    "SELECT * FROM bidding_table where current_highest_buyer=(?)",
+    [req.query.uid],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        // console.log(result);
+        var date = new Date();
+        let arr = [];
+        result.map((item) => {
+          var obj = {};
+          var date2 = new Date(item.time);
+          if (date - date2 > 0) {
+            // console.log(item);
+            obj.item_id = item.item_id;
+            obj.current_price = item.current_price;
+            obj.time = item.time;
+            db.query(
+              "SELECT product_name FROM inventory where product_id=(?)",
+              [item.item_id],
+              (err, result2) => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  // console.log(result[0].product_name);
+                  obj.product_name = result2[0].product_name;
+                }
+              }
+            );
+            arr.push(obj);
+          }
+        });
+        console.log(arr);
+        res.send(arr);
+      }
+    }
+  );
+});
+
 // app.put("/update_balance", (req, res) => {
 //   const id = req.body.id;
 //   const balance = req.body.balance;

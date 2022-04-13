@@ -20,7 +20,7 @@ import FadeLoader from 'react-spinners/FadeLoader';
 import LogoutIcon from '@mui/icons-material/Logout';
 import StoreIcon from '@mui/icons-material/Store';
 import HistoryIcon from '@mui/icons-material/History';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+// import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -109,7 +109,7 @@ export default function Dashboard() {
             <ListItemText primary="Store" />
           </ListItem>
         </List>
-        <Divider />
+        {/* <Divider />
         <List>
           <ListItem button onClick={() => navigate('/admin')}>
             <ListItemIcon>
@@ -117,7 +117,7 @@ export default function Dashboard() {
             </ListItemIcon>
             <ListItemText primary="Admin" />
           </ListItem>
-        </List>
+        </List> */}
         <Divider />
         <List>
           <ListItem button onClick={() => setDisplay(true)}>
@@ -164,7 +164,7 @@ export default function Dashboard() {
         )}
       </Box>
       <FadeLoader
-        color={'gainsboro'}
+        color={'blue'}
         loading={loading}
         size={350}
         css={{ position: 'absolute', left: '50%', top: '50%' }}

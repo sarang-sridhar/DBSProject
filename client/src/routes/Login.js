@@ -57,7 +57,7 @@ function Login() {
       }}>
       <GoogleButton onClick={authHandle} />
       <FadeLoader
-        color={'gainsboro'}
+        color={'blue'}
         loading={loading}
         size={350}
         css={{ position: 'absolute', left: '50%', top: '50%' }}
