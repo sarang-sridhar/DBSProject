@@ -87,7 +87,7 @@ const BidProductCard = (props) => {
   const [successOpen, setSucessOpen] = React.useState(false);
 
   const handleBid = () => {
-    if (currentVal > currentPrice) {
+    if (currentVal > currentPrice && props.balance > currentVal) {
       setCurrentPrice(currentVal);
       let data = {
         item_id: props.itemId,
@@ -217,7 +217,8 @@ BidProductCard.propTypes = {
   highestBidder: PropTypes.string,
   time: PropTypes.string,
   count: PropTypes.number,
-  setCount: PropTypes.func
+  setCount: PropTypes.func,
+  balance: PropTypes.number
 };
 
 export default BidProductCard;

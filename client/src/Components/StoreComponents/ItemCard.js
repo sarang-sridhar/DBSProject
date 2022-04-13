@@ -30,7 +30,8 @@ const ItemCard = (props) => {
               state: {
                 id: props.product_id,
                 itemName: props.product_name,
-                basePrice: props.product_baseprice
+                basePrice: props.product_baseprice,
+                balance: props.balance
               }
             });
           }}>
@@ -44,7 +45,8 @@ const ItemCard = (props) => {
 ItemCard.propTypes = {
   product_name: PropTypes.string,
   product_id: PropTypes.string,
-  product_baseprice: PropTypes.number
+  product_baseprice: PropTypes.number,
+  balance: PropTypes.number
 };
 
 export default ItemCard;
