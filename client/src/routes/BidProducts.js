@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import BidProductCard from '../Components/BidProducts/BidProductCard';
+import { Container } from '@mui/material';
 import axios from '../axios-study';
 import FadeLoader from 'react-spinners/FadeLoader';
 
@@ -29,7 +30,14 @@ const BidProducts = () => {
 
   console.log(details);
   return (
-    <>
+    <Container
+      style={{
+        height: '100vh',
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
       <BidProductCard
         count={count}
         setCount={setCount}
@@ -49,7 +57,7 @@ const BidProducts = () => {
         size={350}
         css={{ position: 'absolute', left: '50%', top: '50%' }}
       />
-    </>
+    </Container>
   );
 };
 

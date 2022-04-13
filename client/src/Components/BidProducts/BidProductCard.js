@@ -143,11 +143,10 @@ const BidProductCard = (props) => {
       <Card
         sx={{ minWidth: 320, maxWidth: 700 }}
         style={{
-          margin: '30px auto',
-          border: '1px solid black',
           opacity: props.loading ? '0.5' : '1'
         }}
-        variant="outlined">
+        elevation={3}
+        variant="elevation">
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             ItemName : {props.itemName}
