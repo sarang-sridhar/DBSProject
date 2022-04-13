@@ -24,6 +24,7 @@ function Login() {
           .post('/login', data)
           .then((response) => {
             sessionStorage.setItem('user', response.data.name);
+            sessionStorage.setItem('uid', response.data.uid);
             console.log(response);
             navigate('/dashboard', {
               state: {

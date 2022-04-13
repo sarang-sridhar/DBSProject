@@ -9,7 +9,6 @@ import {
   Snackbar
 } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
-import Countdown from 'react-countdown';
 
 import PropTypes from 'prop-types';
 
@@ -97,13 +96,26 @@ const BidProductCard = (props) => {
         current_price: currentVal,
         base_price: props.basePrice
       };
+
+      let updateBalanceData = {
+        id: sessionStorage.getItem('uid'),
+        balance: 69420
+      };
+
       axios
         .post('/update_store', data)
         .then((response) => {
           console.log(response);
-          if (response.data.status == 1) {
+          if (response.data.status === 1) {
             props.setCount(props.count + 1);
           }
+        })
+        .catch((error) => console.log(error));
+
+      axios
+        .put('/update_balance', updateBalanceData)
+        .then((response) => {
+          console.log(response);
         })
         .catch((error) => console.log(error));
 
@@ -128,7 +140,7 @@ const BidProductCard = (props) => {
   return (
     <>
       <Card
-        sx={{ minWidth: 320, maxWidth: 500 }}
+        sx={{ minWidth: 320, maxWidth: 600 }}
         style={{ margin: '30px auto', border: '1px solid black' }}
         variant="outlined">
         <CardContent>
@@ -153,9 +165,9 @@ const BidProductCard = (props) => {
               ? getDate(props.time.slice(0, 10)) + ' ' + tConvert(props.time.slice(11, 16))
               : 'Bid Over'}
           </Typography>
-          <Typography gutterBottom variant="h5" component="div">
+          {/* <Typography gutterBottom variant="h5" component="div">
             Time Left : {<Countdown date={Date.now() + 8.64e8} />}
-          </Typography>
+          </Typography> */}
         </CardContent>
         <CardActions>
           <div style={{ width: '80%' }}>

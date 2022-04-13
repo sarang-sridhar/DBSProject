@@ -94,7 +94,6 @@ app.post("/get_details", (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        // console.log(result.length);
         if (result.length) {
           res.send(result[0]);
         } else {
@@ -171,6 +170,22 @@ app.get("/get_store", (req, res) => {
       res.send(result);
     }
   });
+});
+
+app.put("/update_balance", (req, res) => {
+  const id = req.body.id;
+  const balance = req.body.balance;
+  db.query(
+    "UPDATE users SET balance = ? WHERE uid = ?",
+    [balance, id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
 });
 
 app.listen(3001, () => {

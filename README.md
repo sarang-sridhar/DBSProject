@@ -6,9 +6,9 @@ Made By
 
 The project structure is divided into two parts -
 
-# Client containing all the code for the frontend part of the project .
+- Client containing all the code for the frontend part of the project .
 
-# Server containing all the code for the backend part of the project .
+- Server containing all the code for the backend part of the project .
 
 To start the project you need to have node (latest stable release) installed in your system .
 
