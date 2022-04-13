@@ -84,7 +84,7 @@ app.post("/login", (req, res) => {
 
 app.post("/get_details", (req, res) => {
   const item_id = req.body.item_id;
-  const base_price = req.body.base_price;
+  // const base_price = req.body.base_price;
   db.query(
     "SELECT * from bidding_table where item_id=(?)",
     [item_id],
@@ -113,10 +113,10 @@ app.post("/get_details", (req, res) => {
           } else res.send(result[0]);
         } else {
           var date = new Date();
-          date.setMinutes(date.getMinutes() + 10);
+          date.setMinutes(date.getMinutes() + 1);
           db.query(
-            "INSERT INTO bidding_table (item_id , base_price,time) VALUES (? , ? ,? )",
-            [item_id, base_price, date],
+            "INSERT INTO bidding_table (item_id , time) VALUES (?,? )",
+            [item_id, date],
             (err, result) => {
               if (err) {
                 console.log(err);
@@ -159,7 +159,7 @@ app.post("/update_store", (req, res) => {
   const item_name = req.body.item_name;
   const current_highest_buyer = req.body.current_highest_buyer;
   const current_price = req.body.current_price;
-  const base_price = req.body.base_price;
+  // const base_price = req.body.base_price;
 
   db.query(
     "SELECT current_highest_buyer,current_price from bidding_table where item_id=(?)",

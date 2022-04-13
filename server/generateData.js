@@ -14,5 +14,5 @@ for (let i = 1; i <= 30; i++) {
 
 fs.writeFile("inventory.json", JSON.stringify(inventory), function (err) {
   if (err) throw err;
-  console.log("complete");
+  // console.log("complete");
 });

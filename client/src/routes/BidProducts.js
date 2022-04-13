@@ -8,7 +8,7 @@ import FadeLoader from 'react-spinners/FadeLoader';
 const BidProducts = () => {
   const location = useLocation();
   const [count, setCount] = React.useState(0);
-  console.log(location.state);
+  // console.log(location.state);
   let data = {
     item_id: location.state.id,
     base_price: location.state.basePrice
@@ -28,7 +28,7 @@ const BidProducts = () => {
       .catch((error) => console.log(error));
   }, [count]);
 
-  console.log(details);
+  // console.log(details);
   return (
     <Container
       style={{

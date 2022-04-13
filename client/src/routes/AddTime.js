@@ -17,7 +17,7 @@ export default function AddTime() {
   const [rows, setRows] = React.useState([]);
   React.useEffect(() => {
     axios.get('/get_store').then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       setRows(response.data);
     });
   }, []);

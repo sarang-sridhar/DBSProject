@@ -69,7 +69,7 @@ const BidProductCard = (props) => {
   const [open, setOpen] = React.useState(false);
   const [successOpen, setSucessOpen] = React.useState(false);
 
-  console.log(props.highestBidder);
+  // console.log(props.highestBidder);
 
   const handleBid = () => {
     if (currentVal > currentPrice && props.balance > currentVal) {
@@ -82,11 +82,11 @@ const BidProductCard = (props) => {
         base_price: props.basePrice
       };
 
-      console.log(props.highestBidder);
+      // console.log(props.highestBidder);
       axios
         .post('/update_store', data)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           if (response.data.status === 1) {
             props.setCount(props.count + 1);
             props.setLoading(true);
@@ -100,7 +100,7 @@ const BidProductCard = (props) => {
     }
   };
 
-  console.log(props.highestBidder);
+  // console.log(props.highestBidder);
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -113,7 +113,9 @@ const BidProductCard = (props) => {
   var date = new Date();
   var date2 = new Date(props.time);
 
-  console.log(props.highestBidder);
+  console.log('Highest bidder is ', props.highestBidder);
+
+  // console.log(props.highestBidder);
   return (
     <>
       <Card
@@ -130,7 +132,7 @@ const BidProductCard = (props) => {
             <CardMedia
               component="img"
               height="200"
-              image={props.highestBidder === null ? sold : unsold}
+              image={props.highestBidder == 'null' ? unsold : sold}
               alt=""
             />
           )}

@@ -43,7 +43,7 @@ export default function Dashboard() {
   React.useEffect(() => {
     axios.get('/get_store').then((reponse) => {
       setProductData(reponse.data);
-      console.log(reponse.data);
+      // console.log(reponse.data);
     });
 
     axios

@@ -60,7 +60,7 @@ export default function CustomerTable() {
     axios
       .get('/my_products', { params: { uid: sessionStorage.getItem('uid') } })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setLoading(false);
         setRows(response.data);
       });

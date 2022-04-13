@@ -28,7 +28,7 @@ function Login() {
             setLoading(false);
             sessionStorage.setItem('user', response.data.name);
             sessionStorage.setItem('uid', response.data.uid);
-            console.log(response);
+            // console.log(response);
             navigate('/dashboard', {
               state: {
                 name: response.data.name,
@@ -39,7 +39,7 @@ function Login() {
             });
           })
           .catch((error) => console.log(error));
-        console.log(result);
+        // console.log(result);
         dispatch(isAuth());
       })
       .catch((err) => console.log(err));
