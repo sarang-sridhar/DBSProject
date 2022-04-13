@@ -15,6 +15,8 @@ import {
   Box
 } from '@mui/material';
 
+import FadeLoader from 'react-spinners/FadeLoader';
+
 import LogoutIcon from '@mui/icons-material/Logout';
 import StoreIcon from '@mui/icons-material/Store';
 import HistoryIcon from '@mui/icons-material/History';
@@ -31,6 +33,7 @@ import { isLoggedOut } from '../redux/actions';
 const drawerWidth = 200;
 
 export default function Dashboard() {
+  let [loading, setLoading] = React.useState(true);
   const [productData, setProductData] = React.useState([]);
   const location = useLocation();
   const [balance, setBalance] = React.useState();
@@ -45,6 +48,7 @@ export default function Dashboard() {
       .get('/get_balance', { params: { uid: sessionStorage.getItem('uid') } })
       .then((response) => {
         setBalance(response.data.balance);
+        setLoading(false);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -57,7 +61,7 @@ export default function Dashboard() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', opacity: loading ? 0.5 : 1 }}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -153,6 +157,12 @@ export default function Dashboard() {
           ))}
         </div>
       </Box>
+      <FadeLoader
+        color={'blue'}
+        loading={loading}
+        size={350}
+        css={{ position: 'absolute', left: '50%', top: '50%' }}
+      />
     </Box>
   );
 }

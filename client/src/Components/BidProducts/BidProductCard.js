@@ -108,6 +108,7 @@ const BidProductCard = (props) => {
           console.log(response);
           if (response.data.status === 1) {
             props.setCount(props.count + 1);
+            props.setLoading(true);
           }
         })
         .catch((error) => console.log(error));
@@ -141,7 +142,11 @@ const BidProductCard = (props) => {
     <>
       <Card
         sx={{ minWidth: 320, maxWidth: 600 }}
-        style={{ margin: '30px auto', border: '1px solid black' }}
+        style={{
+          margin: '30px auto',
+          border: '1px solid black',
+          opacity: props.loading ? '0.5' : '1'
+        }}
         variant="outlined">
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
@@ -221,7 +226,9 @@ BidProductCard.propTypes = {
   time: PropTypes.string,
   count: PropTypes.number,
   setCount: PropTypes.func,
-  balance: PropTypes.number
+  balance: PropTypes.number,
+  loading: PropTypes.bool,
+  setLoading: PropTypes.func
 };
 
 export default BidProductCard;
