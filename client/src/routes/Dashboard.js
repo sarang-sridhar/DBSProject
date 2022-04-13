@@ -29,6 +29,7 @@ import axios from '../axios-study';
 // products import
 import ItemCard from '../Components/StoreComponents/ItemCard';
 import { isLoggedOut } from '../redux/actions';
+import CustomerTable from '../Components/StoreComponents/CustomerTable';
 
 const drawerWidth = 200;
 
@@ -37,6 +38,7 @@ export default function Dashboard() {
   const [productData, setProductData] = React.useState([]);
   const location = useLocation();
   const [balance, setBalance] = React.useState();
+  const [display, setDisplay] = React.useState(false);
 
   React.useEffect(() => {
     axios.get('/get_store').then((reponse) => {
@@ -100,7 +102,7 @@ export default function Dashboard() {
         <Toolbar />
         <Divider />
         <List>
-          <ListItem button>
+          <ListItem button onClick={() => setDisplay(false)}>
             <ListItemIcon>
               <StoreIcon />
             </ListItemIcon>
@@ -118,7 +120,7 @@ export default function Dashboard() {
         </List>
         <Divider />
         <List>
-          <ListItem button>
+          <ListItem button onClick={() => setDisplay(true)}>
             <ListItemIcon>
               <HistoryIcon />
             </ListItemIcon>
@@ -138,27 +140,31 @@ export default function Dashboard() {
 
       <Box component="main" sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}>
         <Toolbar />
-        <div
-          style={{
-            width: '100%',
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-around'
-          }}>
-          {productData.map((item) => (
-            <>
-              <ItemCard
-                product_id={item.product_id}
-                product_name={item.product_name}
-                product_baseprice={item.product_baseprice}
-                balance={balance}
-              />
-            </>
-          ))}
-        </div>
+        {display ? (
+          <CustomerTable />
+        ) : (
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'space-around'
+            }}>
+            {productData.map((item) => (
+              <>
+                <ItemCard
+                  product_id={item.product_id}
+                  product_name={item.product_name}
+                  product_baseprice={item.product_baseprice}
+                  balance={balance}
+                />
+              </>
+            ))}
+          </div>
+        )}
       </Box>
       <FadeLoader
-        color={'blue'}
+        color={'gainsboro'}
         loading={loading}
         size={350}
         css={{ position: 'absolute', left: '50%', top: '50%' }}

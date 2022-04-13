@@ -44,7 +44,7 @@ const BidProducts = () => {
         setLoading={setLoading}
       />
       <FadeLoader
-        color={'blue'}
+        color={'gainsboro'}
         loading={loading}
         size={350}
         css={{ position: 'absolute', left: '50%', top: '50%' }}
