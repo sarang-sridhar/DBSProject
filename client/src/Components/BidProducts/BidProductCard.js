@@ -141,7 +141,7 @@ const BidProductCard = (props) => {
   return (
     <>
       <Card
-        sx={{ minWidth: 320, maxWidth: 600 }}
+        sx={{ minWidth: 320, maxWidth: 700 }}
         style={{
           margin: '30px auto',
           border: '1px solid black',
